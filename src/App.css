@@ -1,0 +1,29 @@
+.App {
+  text-align: center;
+}
+
+nav{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background: rgb(29, 58, 68);
+  color: white;
+}
+
+.nav-links {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  text-decoration: none;
+  
+}
+
+titleH6 {
+  align-items: left;
+  list-style: none;
+  color: rgb(175, 39, 39);
+  font-weight: 600;
+}
