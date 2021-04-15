@@ -5,7 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-export default function StartDate() {
+const GeneralDetailsForm = ({ formData, setFormData }) => {
   const [minPrice, setMinPrice] = useState();
   const [maxPrice, setMaxPrice] = useState();
   const [minCorrelation, setMinCorrelation] = useState();
@@ -20,14 +20,35 @@ export default function StartDate() {
     setMinCorrelation(event.target.value);
   };
 
+  const handleStartDate = (event) => {
+    setFormData({
+      ...formData,
+      [formData.event.target.name]: event.target.value
+    })
+  }
+
+  const handleEndDate = (event) => {
+
+  }
+
+  const handleChange = (event) => {
+    debugger
+    setFormData({
+      ...formData,
+      [formData.event.target.name]: event.target.value
+    })
+  }
 
   return (
     <form style={styles.container} noValidate>
       <TextField
         id="date"
+        name='periodStart'
         label="Start date"
         type="date"
         defaultValue="2020-01-01"
+        value={formData.periodStart}
+        onChange={handleStartDate}
         style={styles.inputField}
         InputLabelProps={{
           shrink: true,
@@ -35,9 +56,12 @@ export default function StartDate() {
       />
       <TextField
         id="date"
+        name='periodEnd'
         label="End date"
         type="date"
         defaultValue="2021-01-01"
+        value={formData.periodEnd}
+        onChange={handleEndDate}
         style={styles.inputField}
         InputLabelProps={{
           shrink: true,
@@ -47,6 +71,7 @@ export default function StartDate() {
         <InputLabel id="minimum-price">Minimum price</InputLabel>
         <Select
           labelId="minimum-price"
+          name='minPrice'
           id="minimum-price"
           value={minPrice}
           onChange={handleMinPrice}
@@ -62,6 +87,7 @@ export default function StartDate() {
         <Select
           labelId="maximum-price"
           id="maximum-price"
+          name='maxPrice'
           value={maxPrice}
           onChange={handleMaxPrice}
         >
@@ -76,6 +102,7 @@ export default function StartDate() {
         <Select
           labelId="minimum-correlation"
           id="minimum-correlation"
+          name='minCorrelation'
           value={minCorrelation}
           onChange={handleMinCorrelation}
         >
@@ -88,6 +115,7 @@ export default function StartDate() {
     </form>
   );
 }
+export default GeneralDetailsForm
 
 const styles = {
   container: {
