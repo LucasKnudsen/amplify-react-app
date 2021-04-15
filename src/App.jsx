@@ -1,29 +1,28 @@
 import React from 'react';
-import './App.css';
 import Amplify from 'aws-amplify';
-import awsconfig from './aws-exports';
-import {AmplifySignOut, withAuthenticator} from '@aws-amplify/ui-react';
-import {BrowserRouter as Router,Switch, Route} from 'react-router-dom';
-import Nav from './Nav';
-import MyHome from './MyHome';
-import About from './About';
+import awsconfig from './modules/aws-exports';
+import { AmplifySignOut, withAuthenticator } from '@aws-amplify/ui-react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import Nav from './components/Nav';
+import MyHome from './views/MyHome';
+import About from './views/About';
 
 Amplify.configure(awsconfig)
 
 function App() {
   return (
     <Router>
-    <div className="App">
-      <header className="App-header">
-        
+      <header >
+
         <Nav />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/MyHome" component={MyHome} />
-          <Route path="/About" component={About} />
-          </Switch>
       </header>
-    </div>
+      <Switch>
+        {/* <Route path="/" exact component={Home} /> */}
+        <Route path="/" exact component={MyHome} />
+        <Route path="/About" component={About} />
+      </Switch>
+
     </Router>
   );
 }
