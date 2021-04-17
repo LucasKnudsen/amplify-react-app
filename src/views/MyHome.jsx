@@ -1,45 +1,79 @@
 import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography';
+import { Container } from '@material-ui/core';
+import { useLocation } from "react-router-dom";
+import axios from 'axios'
 
 import GeneralDetailsForm from '../components/GeneralDetailsForm';
 import CustomSlider from '../shared/CustomSlider'
 import PortfolioTable from '../shared/PortfolioTable'
-import { Container } from '@material-ui/core';
+import LineGraph from '../shared/LineGraph'
+import { fixture } from './portfolioFixture.js'
+import { setCategory, setHeader } from '../modules/overviewServices'
 
-const portfolioApiStructure = {
-  periodStart: 'string',
-  periodEnd: 'string',
-  minPrice: 'float',
-  maxPrice: 'float',
-  minCorrelation: 'float',
-  rankStart: 'int',
-  rankEnd: 'int'
+const generalDetails = {
+  periodStart: '01/01/2020',
+  periodEnd: '01/01/2021',
+  minPrice: 2,
+  maxPrice: 2500,
+  minCorrelation: 0.85,
 }
 
 const MyHome = () => {
-  const [formData, setFormData] = useState(portfolioApiStructure)
-  const [slider1, setSlider1] = useState(1)
-  const [slider2, setSlider2] = useState(1)
+  const [formData, setFormData] = useState(generalDetails)
+  const [slider1, setSlider1] = useState([1, 8])
+  const [slider2, setSlider2] = useState([3, 11])
+  const [loading, setLoading] = useState(false)
+  const [graphData, setGraphData] = useState()
+  let location = useLocation()
+
+  const calculate = async () => {
+    let category = setCategory(location)
+    setLoading(true)
+    let body = {
+      portfolios: [{
+        ...formData,
+        rankStart: slider1[0],
+        rankEnd: slider1[1],
+        category
+      },
+      {
+        ...formData,
+        rankStart: slider2[0],
+        rankEnd: slider2[1]
+      },
+      ]
+    }
+    try {
+      let response = await axios.post('https://nw70g87jni.execute-api.us-east-1.amazonaws.com/prod/portfolio/performance-graph', body)
+      setGraphData(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+    debugger
+
+    setLoading(false)
+  }
 
   return (
-    <Grid container style={styles.root} spacing={1}>
+    <Grid container style={styles.root} >
       <Grid item xs={12} >
         <Container style={styles.mainContainer}>
           <Typography variant="h6" gutterBottom>
             OVERVIEW
       </Typography>
           <Typography variant="h4" gutterBottom>
-            Select US Equities
-      </Typography>
+            {setHeader(location)}
+          </Typography>
           <Typography variant="subtitle2" display="block" gutterBottom>
             Check gain and volatility. All equities are selected from S&P 500
       </Typography>
         </Container>
         <Grid
           container
-          textAlign="left"
           justify="center"
           spacing={4}
           direction="row"
@@ -74,8 +108,16 @@ const MyHome = () => {
             </Paper>
           </Grid>
 
+          <Button style={styles.button} variant="contained" color="primary" size='large'
+            onClick={() => calculate()}
+          >
+            Calculate
+          </Button>
+
           <Grid key="3" item>
-            <Paper style={styles.graphContainer} />
+            <Paper style={styles.graphContainer} >
+              <LineGraph data={graphData} loading={loading} />
+            </Paper>
           </Grid>
         </Grid>
       </Grid>
@@ -102,11 +144,18 @@ const styles = {
     height: 352,
   },
   graphContainer: {
-    height: 440,
-    width: '101vh',
+    padding: 25,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '60vw',
+    height: '25vw'
   },
   itemTitle: {
     fontWeight: 'bold',
     textDecoration: 'underline'
+  },
+  button: {
+    margin: '25px 35vw',
   }
 }

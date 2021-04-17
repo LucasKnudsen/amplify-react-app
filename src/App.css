@@ -12,13 +12,14 @@ nav{
 }
 
 .nav-links {
-  width: 40%;
+  width: 100%
+  /* width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   list-style: none;
   text-decoration: none;
-  
+  flex-direction: row; */
 }
 
 titleH6 {

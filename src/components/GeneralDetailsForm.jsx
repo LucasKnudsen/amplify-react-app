@@ -6,38 +6,19 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 const GeneralDetailsForm = ({ formData, setFormData }) => {
-  const [minPrice, setMinPrice] = useState();
-  const [maxPrice, setMaxPrice] = useState();
-  const [minCorrelation, setMinCorrelation] = useState();
-
-  const handleMinPrice = (event) => {
-    setMinPrice(event.target.value);
-  };
-  const handleMaxPrice = (event) => {
-    setMaxPrice(event.target.value);
-  };
-  const handleMinCorrelation = (event) => {
-    setMinCorrelation(event.target.value);
-  };
-
-  const handleStartDate = (event) => {
-    setFormData({
-      ...formData,
-      [formData.event.target.name]: event.target.value
-    })
-  }
-
-  const handleEndDate = (event) => {
-
-  }
 
   const handleChange = (event) => {
-    debugger
-    // setFormData({
-    //   ...formData,
-    //   formData[event.target.name]: event.target.value
-    // })
-    debugger
+    if (event.target.name.includes('period')) {
+      setFormData({
+        ...formData,
+        [event.target.name]: new Date(event.target.value).toLocaleDateString()
+      })
+      return
+    }
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value
+    })
   }
 
   return (
@@ -48,7 +29,6 @@ const GeneralDetailsForm = ({ formData, setFormData }) => {
         label="Start date"
         type="date"
         defaultValue="2020-01-01"
-        value={formData.periodStart}
         onChange={handleChange}
         style={styles.inputField}
         InputLabelProps={{
@@ -61,7 +41,6 @@ const GeneralDetailsForm = ({ formData, setFormData }) => {
         label="End date"
         type="date"
         defaultValue="2021-01-01"
-        value={formData.periodEnd}
         onChange={handleChange}
         style={styles.inputField}
         InputLabelProps={{
@@ -69,13 +48,13 @@ const GeneralDetailsForm = ({ formData, setFormData }) => {
         }}
       />
       <FormControl style={styles.formControl}>
-        <InputLabel id="minimum-price">Minimum price</InputLabel>
+        <InputLabel id="minimum-price">Minimum stock price ($)</InputLabel>
         <Select
           labelId="minimum-price"
           name='minPrice'
           id="minimum-price"
-          value={minPrice}
-          onChange={handleMinPrice}
+          value={formData.minPrice}
+          onChange={handleChange}
         >
           <MenuItem value={1}>1</MenuItem>
           <MenuItem value={2}>2</MenuItem>
@@ -84,32 +63,35 @@ const GeneralDetailsForm = ({ formData, setFormData }) => {
       </FormControl>
 
       <FormControl style={styles.formControl}>
-        <InputLabel id="maximum-price">Maximum price</InputLabel>
+        <InputLabel id="maximum-price">Maximum stock price ($)</InputLabel>
         <Select
           labelId="maximum-price"
           id="maximum-price"
           name='maxPrice'
-          value={maxPrice}
-          onChange={handleMaxPrice}
+          value={formData.maxPrice}
+          onChange={handleChange}
         >
-          <MenuItem value={1}>1</MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
+          <MenuItem value={500}>500</MenuItem>
+          <MenuItem value={1000}>1000</MenuItem>
+          <MenuItem value={1500}>1500</MenuItem>
+          <MenuItem value={2000}>2000</MenuItem>
+          <MenuItem value={2500}>2500</MenuItem>
+          <MenuItem value={3000}>3000</MenuItem>
         </Select>
       </FormControl>
 
       <FormControl style={styles.formControl}>
-        <InputLabel id="minimum-correlation">Minimum correlation</InputLabel>
+        <InputLabel id="minimum-correlation">Minimum correlation ($)</InputLabel>
         <Select
           labelId="minimum-correlation"
           id="minimum-correlation"
           name='minCorrelation'
-          value={minCorrelation}
-          onChange={handleMinCorrelation}
+          value={formData.minCorrelation}
+          onChange={handleChange}
         >
-          <MenuItem value={1}>1</MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
+          <MenuItem value={0.1}>0.1</MenuItem>
+          <MenuItem value={0.5}>0.5</MenuItem>
+          <MenuItem value={0.85}>0.85</MenuItem>
         </Select>
       </FormControl>
 

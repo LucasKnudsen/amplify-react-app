@@ -84,55 +84,71 @@ export default function ClippedDrawer() {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="h6" align='center' gutterBottom>
               Investment Categories
               </Typography>
-            <ListItem button key="USequities">
-              {/* <Link to="/MyHome" className="nav-links"> */}
-              <ListItemIcon><AttachMoneyIcon /></ListItemIcon>
-              <ListItemText primary="USequities" />
-              {/* </Link> */}
-            </ListItem>
+            <Link to="/us" style={styles.itemLink}>
+              <ListItem button key="US Equities">
+                <ListItemIcon><AttachMoneyIcon /></ListItemIcon>
+                <ListItemText primary="US Equities" />
+              </ListItem>
+            </Link>
 
-            <ListItem button key="Technology">
-              <ListItemIcon><LaptopMacIcon /></ListItemIcon>
-              <ListItemText primary="Technology" />
-            </ListItem>
+            <Link to="/technology" style={styles.itemLink}>
+              <ListItem button key="Technology">
+                <ListItemIcon><LaptopMacIcon /></ListItemIcon>
+                <ListItemText primary="Technology" />
+              </ListItem>
+            </Link>
 
-            <ListItem button key="Middleeast">
-              <ListItemIcon><MapIcon /></ListItemIcon>
-              <ListItemText primary="Middleeast" />
-            </ListItem>
+            <Link to="/middle-east" style={styles.itemLink}>
+              <ListItem button key="Middle East">
+                <ListItemIcon><MapIcon /></ListItemIcon>
+                <ListItemText primary="Middle East" />
+              </ListItem>
+            </Link>
 
-            <ListItem button key="Healthcare">
-              <ListItemIcon><LocalHospitalIcon /></ListItemIcon>
-              <ListItemText primary="Healthcare" />
-            </ListItem>
+            <Link to="/healthcare" style={styles.itemLink}>
+              <ListItem button key="Healthcare">
+                <ListItemIcon><LocalHospitalIcon /></ListItemIcon>
+                <ListItemText primary="Healthcare" />
+              </ListItem>
+            </Link>
 
-            <ListItem button key="Global">
-              <ListItemIcon><PublicIcon /></ListItemIcon>
-              <ListItemText primary="Global" />
-            </ListItem>
+            <Link to="/global" style={styles.itemLink}>
+              <ListItem button key="Global">
+                <ListItemIcon><PublicIcon /></ListItemIcon>
+                <ListItemText primary="Global" />
+              </ListItem>
+            </Link>
 
-            <ListItem button key="Emerging Markets">
-              <ListItemIcon><LanguageIcon /></ListItemIcon>
-              <ListItemText primary="Emerging Markets" />
-            </ListItem>
+            <Link to="/emerging-markets" style={styles.itemLink}>
+              <ListItem button key="Emerging Markets">
+                <ListItemIcon><LanguageIcon /></ListItemIcon>
+                <ListItemText primary="Emerging Markets" />
+              </ListItem>
+            </Link>
 
-            <ListItem button key="China">
-              <ListItemIcon><TranslateIcon /></ListItemIcon>
-              <ListItemText primary="China" />
-            </ListItem>
+            <Link to="/china" style={styles.itemLink}>
+              <ListItem button key="China">
+                <ListItemIcon><TranslateIcon /></ListItemIcon>
+                <ListItemText primary="China" />
+              </ListItem>
+            </Link>
 
-            <ListItem button key="Energy">
-              <ListItemIcon><PowerIcon /></ListItemIcon>
-              <ListItemText primary="Energy" />
-            </ListItem>
+            <Link to="/energy" style={styles.itemLink}>
+              <ListItem button key="Energy">
+                <ListItemIcon><PowerIcon /></ListItemIcon>
+                <ListItemText primary="Energy" />
+              </ListItem>
+            </Link>
 
-            <ListItem button key="Europe">
-              <ListItemIcon><EuroIcon /></ListItemIcon>
-              <ListItemText primary="Europe" />
-            </ListItem>
+            <Link to="/europe" style={styles.itemLink}>
+              <ListItem button key="Europe">
+                <ListItemIcon><EuroIcon /></ListItemIcon>
+                <ListItemText primary="Europe" />
+              </ListItem>
+            </Link>
 
           </List>
           <Divider />
@@ -171,6 +187,15 @@ export default function ClippedDrawer() {
         <Toolbar />
 
       </main>
-    </div>
+    </div >
   );
+}
+
+const styles = {
+  itemLink: {
+    display: 'flex',
+    flexDirection: 'row',
+    textDecoration: 'none',
+    color: '#333'
+  }
 }

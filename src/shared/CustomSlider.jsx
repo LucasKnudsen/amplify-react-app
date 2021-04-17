@@ -10,7 +10,7 @@ const CustomSlider = ({ value, setValue, text, id }) => {
 
   return (
     <div style={{ margin: '15px 5px' }}>
-      <Typography id={id} gutterBottom>
+      <Typography id={id} align='center' gutterBottom>
         {text}
       </Typography>
       <Slider
