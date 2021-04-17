@@ -33,10 +33,11 @@ const GeneralDetailsForm = ({ formData, setFormData }) => {
 
   const handleChange = (event) => {
     debugger
-    setFormData({
-      ...formData,
-      [formData.event.target.name]: event.target.value
-    })
+    // setFormData({
+    //   ...formData,
+    //   formData[event.target.name]: event.target.value
+    // })
+    debugger
   }
 
   return (
@@ -48,7 +49,7 @@ const GeneralDetailsForm = ({ formData, setFormData }) => {
         type="date"
         defaultValue="2020-01-01"
         value={formData.periodStart}
-        onChange={handleStartDate}
+        onChange={handleChange}
         style={styles.inputField}
         InputLabelProps={{
           shrink: true,
@@ -61,7 +62,7 @@ const GeneralDetailsForm = ({ formData, setFormData }) => {
         type="date"
         defaultValue="2021-01-01"
         value={formData.periodEnd}
-        onChange={handleEndDate}
+        onChange={handleChange}
         style={styles.inputField}
         InputLabelProps={{
           shrink: true,
