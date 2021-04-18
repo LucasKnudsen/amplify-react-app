@@ -52,17 +52,17 @@ const LineGraph = ({ data, loading }) => {
 
   return (
     <>
-      {data ? (
-        <Line
-          data={finalData}
-        />
+      {loading ? (
+        <CircularProgress size={75} color='primary' />
       ) : (
-          loading ? (
-            <CircularProgress size={75} color='primary' />
+          data ? (
+            <Line
+              data={finalData}
+            />
           ) : (
               <Typography>Calculate to display a chart!</Typography>
-            ))
-      }
+            )
+        )}
     </>
   )
 }

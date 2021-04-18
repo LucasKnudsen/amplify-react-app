@@ -48,7 +48,7 @@ const MyHome = () => {
       ]
     }
     try {
-      let response = await axios.post('https://nw70g87jni.execute-api.us-east-1.amazonaws.com/prod/portfolio/performance-graph', body)
+      let response = await axios.post('https://nw70g87jni.execute-api.us-east-1.amazonaws.com/development/portfolio/performance-graph', body)
       setGraphData(response.data)
     } catch (error) {
       console.log(error)
@@ -149,7 +149,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     width: '60vw',
-    height: '25vw'
+    height: '32vw'
   },
   itemTitle: {
     fontWeight: 'bold',
@@ -157,5 +157,6 @@ const styles = {
   },
   button: {
     margin: '25px 35vw',
+    minWidth: 120,
   }
 }

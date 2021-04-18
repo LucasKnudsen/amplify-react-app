@@ -31,7 +31,9 @@ const PortfolioTable = ({ data, id, title }) => {
               <TableCell component="th" scope="row">
                 {labels[i]}
               </TableCell>
-              <TableCell align="right">{item.value}</TableCell>
+              <TableCell align="right">
+                {item.value}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
